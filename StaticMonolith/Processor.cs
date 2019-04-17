@@ -22,14 +22,14 @@ namespace StaticMonolith
             // send an e-mail or something...
         }
 
-        public static Widget CommitFoo(Widget widget)
+        private static Widget CommitFoo(Widget widget)
         {
             var repo = new RepositoryA();
             widget = repo.Set(widget.Id, widget.Value);
             return widget;
         }
 
-        public static void CalculateFoo(Widget widget)
+        private static void CalculateFoo(Widget widget)
         {
             Console.WriteLine("Calculating Foo");
         }
