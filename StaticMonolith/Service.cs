@@ -4,9 +4,9 @@
     {
         public void Run(Widget widget)
         {
-            widget = Processor.PreProcess(widget);
-            widget = Processor.Process(widget);
-            Processor.NotifyComplete(widget);
+            widget = Processor.Instance.PreProcess(widget);
+            widget = Processor.Instance.Process(widget);
+            Processor.Instance.NotifyComplete(widget);
         }
     }
 }
