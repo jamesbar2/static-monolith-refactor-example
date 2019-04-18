@@ -2,15 +2,22 @@
 {
     public class Controller
     {
+        private readonly IProcessor _processor;
+
+        public Controller(IProcessor processor)
+        {
+            _processor = processor;
+        }
+
         public Widget PostValidate(Widget widget)
         {
-            return Processor.Instance.PreProcess(widget);
+            return _processor.PreProcess(widget);
         }
 
         public void PostCommit(Widget widget)
         {
-            widget = Processor.Instance.Process(widget);
-            Processor.Instance.NotifyComplete(widget);
+            widget = _processor.Process(widget);
+            _processor.NotifyComplete(widget);
         }
     }
 }

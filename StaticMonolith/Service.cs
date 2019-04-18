@@ -2,11 +2,17 @@
 {
     public class Service
     {
+        private readonly IProcessor _processor;
+
+        public Service(IProcessor processor)
+        {
+            _processor = processor;
+        }
         public void Run(Widget widget)
         {
-            widget = Processor.Instance.PreProcess(widget);
-            widget = Processor.Instance.Process(widget);
-            Processor.Instance.NotifyComplete(widget);
+            widget = _processor.PreProcess(widget);
+            widget = _processor.Process(widget);
+            _processor.NotifyComplete(widget);
         }
     }
 }

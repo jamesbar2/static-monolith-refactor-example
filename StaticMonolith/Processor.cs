@@ -11,8 +11,20 @@ namespace StaticMonolith
 
     public class Processor : IProcessor
     {
+        private readonly IRepositoryA _repositoryA;
         private static readonly Lazy<IProcessor> LazyProcessor = new Lazy<IProcessor>(() => new Processor());
         public static IProcessor Instance => LazyProcessor.Value;
+
+        private Processor() : this(new RepositoryA())
+        {
+            // don't allow this to be constructed without dependencies
+            // if this class is needed, .Instance must be called, otherwise, DI!
+        }
+
+        public Processor(IRepositoryA repositoryA)
+        {
+            _repositoryA = repositoryA;
+        }
 
         public Widget PreProcess(Widget widget)
         {
@@ -33,8 +45,7 @@ namespace StaticMonolith
 
         private Widget CommitFoo(Widget widget)
         {
-            var repo = new RepositoryA();
-            widget = repo.Set(widget.Id, widget.Value);
+            widget = _repositoryA.Set(widget.Id, widget.Value);
             return widget;
         }
 
