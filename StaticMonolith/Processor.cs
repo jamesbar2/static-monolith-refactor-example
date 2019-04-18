@@ -11,6 +11,9 @@ namespace StaticMonolith
 
     public class Processor : IProcessor
     {
+        private static readonly Lazy<IProcessor> LazyProcessor = new Lazy<IProcessor>(() => new Processor());
+        public static IProcessor Instance => LazyProcessor.Value;
+
         public Widget PreProcess(Widget widget)
         {
             CalculateFoo(widget);
