@@ -2,7 +2,14 @@
 
 namespace StaticMonolith
 {
-    public class Processor
+    public interface IProcessor
+    {
+        Widget PreProcess(Widget widget);
+        Widget Process(Widget widget);
+        void NotifyComplete(Widget widget);
+    }
+
+    public class Processor : IProcessor
     {
         public Widget PreProcess(Widget widget)
         {
